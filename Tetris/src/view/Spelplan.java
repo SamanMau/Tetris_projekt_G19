@@ -1,7 +1,8 @@
-package Tetris.src.view;
+package view;
 
 import javax.swing.*;
 import java.awt.*;
+
 
 public class Spelplan extends JPanel {
     private final int column = 10;
@@ -16,11 +17,7 @@ public class Spelplan extends JPanel {
         this.setBackground(Color.BLACK);
         this.setLayout(null);
         this.setVisible(true);
-        //System.out.println(this.get);
-    }
-
-    public static void main(String[] args) {
-        MainFrame frame = new MainFrame();
+        System.out.println(this.getSize());
     }
 
     @Override
@@ -44,6 +41,9 @@ public class Spelplan extends JPanel {
                 g.drawRect(width * kvadrat, height * kvadrat, kvadrat, kvadrat);
             }
         }
+    }
+    public static void main(String[] args) {
+        MainFrame frame = new MainFrame();
     }
 
 }
