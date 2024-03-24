@@ -1,6 +1,4 @@
-package view;
-
-import view.MainFrame;
+package Tetris.src.view;
 
 import javax.swing.*;
 import java.awt.*;
