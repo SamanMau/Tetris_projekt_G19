@@ -1,23 +1,21 @@
 package view;
 
+import com.sun.tools.javac.Main;
+
 import javax.swing.*;
 import java.awt.*;
 
 
 public class Spelplan extends JPanel {
     private final int column = 10;
-    private final int kvadrat = (600 / column) / 2;
-    private final int row = 600 / kvadrat;
-    //private final int kvadrat = 30;
+    private final int row = 20; // 600 / kvadrat
+    private final int kvadrat = 600 / row; //30
 
     public Spelplan(){
-        //this.setBounds(144, 63, 300, 600); //y = 35
-        // x = 144, y = 63, width = 300, height = 600
         this.setPreferredSize(new Dimension(300, 600));
         this.setBackground(Color.BLACK);
         this.setLayout(null);
         this.setVisible(true);
-        System.out.println(this.getSize());
     }
 
     @Override
@@ -42,8 +40,4 @@ public class Spelplan extends JPanel {
             }
         }
     }
-    public static void main(String[] args) {
-        MainFrame frame = new MainFrame();
-    }
-
 }
