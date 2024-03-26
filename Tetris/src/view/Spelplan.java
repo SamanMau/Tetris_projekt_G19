@@ -11,23 +11,23 @@ public class Spelplan extends JPanel{
     private final int column = 10;
     private final int row = 20; // 600 / kvadrat
     private final int kvadrat = 600 / row; //30
-    TetrisBlock tetrisBlock;
-    private ArrayList<int[][]> listOfBlocks; //For testing , should be in controller
-
+    ListOfBlocks listOfBlocksObj; //For testing , should be in controller
+    private ArrayList<TetrisBlock> listOfBlocks; //For testing , should be in controller
+    private int blockNum = 5;
     public Spelplan(){
         this.setPreferredSize(new Dimension(300, 600));
         this.setBackground(Color.BLACK);
-        tetrisBlock = new TetrisBlock(); //For testing , should be in controller
-        this.listOfBlocks = tetrisBlock.getBlockList(); //For testing , should be in controller
+        listOfBlocksObj = new ListOfBlocks(); //For testing , should be in controller
+        this.listOfBlocks = listOfBlocksObj.getBlockList(); //For testing , should be in controller
         this.setLayout(null);
         this.setVisible(true);
     }
 
     private void drawBlock(Graphics g) {
-        for(int row = 0; row < listOfBlocks.get(2).length; row++){
-            for (int col = 0; col < listOfBlocks.get(2)[0].length; col++){
-                if(listOfBlocks.get(2)[row][col] == 1){
-                    g.setColor(Color.red);
+        for(int row = 0; row < listOfBlocks.get(blockNum).getShape().length; row++){
+            for (int col = 0; col < listOfBlocks.get(blockNum).getShape()[0].length; col++){
+                if(listOfBlocks.get(blockNum).getShape()[row][col] == 1){
+                    g.setColor(listOfBlocks.get(blockNum).getColor());
                     g.fillRect(col * kvadrat, row * kvadrat, kvadrat, kvadrat);
                 }
             }
