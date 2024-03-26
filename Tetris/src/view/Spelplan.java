@@ -1,6 +1,6 @@
 package view;
 
-import Model.TetrisBlock;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
