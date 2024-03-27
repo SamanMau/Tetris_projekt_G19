@@ -13,7 +13,8 @@ public class Spelplan extends JPanel{
     private final int kvadrat = 600 / row; //30
     ListOfBlocks listOfBlocksObj; //For testing , should be in controller
     private ArrayList<TetrisBlock> listOfBlocks; //For testing , should be in controller
-    private int blockNum = 5;
+    private int blockNum = 6;
+
     public Spelplan(){
         this.setPreferredSize(new Dimension(300, 600));
         this.setBackground(Color.BLACK);
@@ -21,6 +22,7 @@ public class Spelplan extends JPanel{
         this.listOfBlocks = listOfBlocksObj.getBlockList(); //For testing , should be in controller
         this.setLayout(null);
         this.setVisible(true);
+
     }
 
     private void drawBlock(Graphics g) {
@@ -32,6 +34,10 @@ public class Spelplan extends JPanel{
                 }
             }
         }
+    }
+
+    public void moveBlock(){
+
     }
 
 

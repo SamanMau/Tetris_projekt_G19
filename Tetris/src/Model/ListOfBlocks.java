@@ -10,10 +10,8 @@ public class ListOfBlocks  {
     private TetrisBlock iBlock;
     private TetrisBlock oBlock;
     private TetrisBlock jBlock;
-
-
-
     private ArrayList<TetrisBlock> listOfBlocks;
+
     public ListOfBlocks(){
         createBlock();
         listOfBlocks = new ArrayList<>();
@@ -26,8 +24,9 @@ public class ListOfBlocks  {
         zBlock = new TetrisBlock(new int[][]{{1,1,0},{0,1,1}}, Color.green);
         sBlock = new TetrisBlock(new int[][]{{0,1,1},{1,1,0}}, Color.red);
         iBlock = new TetrisBlock(new int[][]{{1},{1},{1},{1}}, Color.cyan);
-        jBlock = new TetrisBlock(new int[][]{{0,1},{0,1},{1,1}}, Color.pink);
         oBlock = new TetrisBlock(new int[][]{{1,1},{1,1}}, Color.yellow);
+        jBlock = new TetrisBlock(new int[][]{{0,1},{0,1},{1,1}}, Color.pink);
+
     }
 
     public void addBlockToList(){
