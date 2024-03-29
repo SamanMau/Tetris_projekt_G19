@@ -4,7 +4,10 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
+import javax.swing.Timer;
 
 
 public class Spelplan extends JPanel{
@@ -13,6 +16,7 @@ public class Spelplan extends JPanel{
     private final int kvadrat = 600 / row; //30
     ListOfBlocks listOfBlocksObj; //For testing , should be in controller
     private ArrayList<TetrisBlock> listOfBlocks; //For testing , should be in controller
+    private Timer timer;
     private int blockNum = 5;
     public Spelplan(){
         this.setPreferredSize(new Dimension(300, 600));
@@ -21,19 +25,28 @@ public class Spelplan extends JPanel{
         this.listOfBlocks = listOfBlocksObj.getBlockList(); //For testing , should be in controller
         this.setLayout(null);
         this.setVisible(true);
+        this.timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listOfBlocks.get(blockNum).setY();
+                repaint();
+            }
+        });
+        this.timer.start();
     }
 
     private void drawBlock(Graphics g) {
-        for(int row = 0; row < listOfBlocks.get(blockNum).getShape().length; row++){
-            for (int col = 0; col < listOfBlocks.get(blockNum).getShape()[0].length; col++){
-                if(listOfBlocks.get(blockNum).getShape()[row][col] == 1){
-                    g.setColor(listOfBlocks.get(blockNum).getColor());
-                    g.fillRect(col * kvadrat, row * kvadrat, kvadrat, kvadrat);
+        TetrisBlock block = listOfBlocks.get(blockNum);
+
+        for(int row = 0; row < block.getShape().length; row++){
+            for (int col = 0; col < block.getShape()[0].length; col++){
+                if(block.getShape()[row][col] == 1){
+                    g.setColor(block.getColor());
+                    g.fillRect(col * kvadrat + block.getX() * kvadrat, row * kvadrat + block.getY() * kvadrat, kvadrat, kvadrat);
                 }
             }
         }
     }
-
 
     @Override
     protected void paintComponent(Graphics g){ //I den här metoden skapar vi rutnät

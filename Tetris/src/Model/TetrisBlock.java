@@ -5,8 +5,12 @@ import java.util.*;
 public class TetrisBlock  {
     private int[][] shape;
     private Color color;
+    private int x;
+    private int y;
    public TetrisBlock(int[][] shape, Color color){
        createBlock(shape, color);
+       this.x = 3;
+       this.y = 0;
    }
 
    public void createBlock(int[][] shape, Color color){
@@ -22,4 +26,18 @@ public class TetrisBlock  {
        return this.color;
    }
 
+    public void setY() {
+        y++;
+    }
+    public void setX() {
+        x++;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }
