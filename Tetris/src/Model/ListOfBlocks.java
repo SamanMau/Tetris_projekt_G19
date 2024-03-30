@@ -24,8 +24,8 @@ public class ListOfBlocks  {
         zBlock = new TetrisBlock(new int[][]{{1,1,0},{0,1,1}}, Color.green);
         sBlock = new TetrisBlock(new int[][]{{0,1,1},{1,1,0}}, Color.red);
         iBlock = new TetrisBlock(new int[][]{{1},{1},{1},{1}}, Color.cyan);
-        oBlock = new TetrisBlock(new int[][]{{1,1},{1,1}}, Color.yellow);
         jBlock = new TetrisBlock(new int[][]{{0,1},{0,1},{1,1}}, Color.pink);
+        oBlock = new TetrisBlock(new int[][]{{1,1}, {1,1}}, Color.yellow);
 
     }
 

@@ -1,12 +1,15 @@
 package Model;
 import java.awt.*;
-import java.util.*;
 
 public class TetrisBlock  {
     private int[][] shape;
     private Color color;
+    private int x;
+    private int y;
    public TetrisBlock(int[][] shape, Color color){
        createBlock(shape, color);
+       this.x = 4;
+       this.y = 0;
    }
 
    public void createBlock(int[][] shape, Color color){
@@ -21,5 +24,30 @@ public class TetrisBlock  {
    public Color getColor(){
        return this.color;
    }
+
+    public void incrementY() {
+        y++;
+    }
+
+    public void incrementX() {
+        x++;
+    }
+
+    public void decrementX() {
+        x--;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void resetCoordinate(){
+        this.x = 4;
+        this.y = -2;
+    }
 
 }
