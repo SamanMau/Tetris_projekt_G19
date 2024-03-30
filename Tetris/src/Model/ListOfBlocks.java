@@ -10,7 +10,6 @@ public class ListOfBlocks  {
     private TetrisBlock iBlock;
     private TetrisBlock oBlock;
     private TetrisBlock jBlock;
-
     private ArrayList<TetrisBlock> listOfBlocks;
 
     public ListOfBlocks(){

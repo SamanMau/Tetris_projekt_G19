@@ -97,5 +97,6 @@ public class Spelplan extends JPanel{
         }
 
         drawBlock(g, block);
+
     }
 }
