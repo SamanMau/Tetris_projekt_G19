@@ -72,8 +72,8 @@ public class Spelplan extends JPanel{
         int x = block.getX();
         int[][] shape = block.getShape();
 
-        for(int row = 0; row < block.getShape().length; row++){
-            for (int col = 0; col < block.getShape()[0].length; col++){
+        for(int row = 0; row < shape.length; row++){
+            for (int col = 0; col < shape[0].length; col++){
                 if(block.getShape()[row][col] == 1){
                     board[y + row][x + col] = block.getColor();
                 }

@@ -50,7 +50,7 @@ public class ListOfBlocks  {
         listOfBlocks.add(oBlock);
         listOfBlocks.add(jBlock);
     }
-    
+
     public void addColorsToList(){
         listOfColors.add(Color.white);
         listOfColors.add(Color.orange);
