@@ -11,7 +11,7 @@ public class MainFrame extends JFrame{
         super("Tetris");
         this.setSize(width, height);
         Spelplan spelplan = new Spelplan();
-        TopPanel tp = new TopPanel();
+        TopPanel tp = new TopPanel(spelplan);
         LPanel lp = new LPanel();
         RPanel rp = new RPanel();
         BottomPanel bp = new BottomPanel();

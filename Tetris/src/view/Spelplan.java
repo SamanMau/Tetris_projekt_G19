@@ -21,6 +21,7 @@ public class Spelplan extends JPanel{
     private Random rd = new Random();
     private int randomNum = rd.nextInt(7); // 7
     private boolean collision;
+    private boolean gameState = false;
 
     public Spelplan(){
         this.setPreferredSize(new Dimension(300, 600));
@@ -31,28 +32,32 @@ public class Spelplan extends JPanel{
         this.setVisible(true);
         block = listOfBlocks.get(randomNum);
         collision = false;
-        startTimer();
+       // startTimer();
     }
 
-    private void startTimer(){
-        this.speed = new Timer(400, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(collision){
-                    return;
+    public void startTimer(boolean gameState){
+        this.gameState = gameState;
+        if(gameState){
+            this.speed = new Timer(200, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(collision){
+                        generateNewBlock();
+                    }
+                    if((block.getShape().length + block.getY()) * kvadrat == 600){
+                        collision = true;
+                      //  generateNewBlock();
+                    }
+                    else{
+                        block.incrementY();
+                        collision = false;
+                    }
+                    repaint();
                 }
-                if((block.getShape().length + block.getY()) * kvadrat == 600){
-                    collision = true;
-                    //generateNewBlock();
-                }
-                else{
-                    block.incrementY();
-                    collision = false;
-                }
-                repaint();
-            }
-        });
-        this.speed.start();
+            });
+            this.speed.start();
+        }
+
     }
 
     private void drawBlock(Graphics g, TetrisBlock block) {
@@ -75,11 +80,11 @@ public class Spelplan extends JPanel{
         }
     }
 
-    /*private void generateNewBlock(){
+    private void generateNewBlock(){
         listOfBlocks.get(randomNum).resetCoordinate();
         randomNum = rd.nextInt(listOfBlocksObj.getBlockList().size());
         this.block = listOfBlocks.get(randomNum);
-    }*/
+    }
 
     @Override
     protected void paintComponent(Graphics g){ //I den här metoden skapar vi rutnät

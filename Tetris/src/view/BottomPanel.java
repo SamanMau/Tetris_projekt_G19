@@ -11,7 +11,7 @@ public class BottomPanel extends JPanel {
     private BufferedImage testImage;
 
     public BottomPanel(){
-        this.setPreferredSize(new Dimension(600, 100));
+        this.setPreferredSize(new Dimension(600, 103));
         this.setBackground(Color.gray);
        // createImage();
 
