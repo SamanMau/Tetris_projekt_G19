@@ -22,7 +22,6 @@ public class Spelplan extends JPanel{
     private Random rd = new Random();
     private int randomNum = rd.nextInt(7); // 7
     private boolean collision;
-
     private Color[][] board = new Color[20][10];
     private boolean gameState = false;
 
@@ -36,9 +35,7 @@ public class Spelplan extends JPanel{
         this.setVisible(true);
         collision = false;
         generateBlock();
-        startTimer(true);
     }
-
     public void startTimer(boolean gameState){
         this.gameState = gameState;
         if(gameState){
@@ -46,14 +43,12 @@ public class Spelplan extends JPanel{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(collision){
-                       // generateNewBlock();
                         addColorToBoard();
                         generateBlock();
                         collision = false;
                     }
                     if((block.getShape().length + block.getY()) * kvadrat == 600){
                         collision = true;
-                      //  generateNewBlock();
                     }
                     else{
                         block.incrementY();
@@ -67,6 +62,56 @@ public class Spelplan extends JPanel{
 
     }
 
+    public void stopTimer(){
+        this.speed.stop();
+    }
+
+    public void decideMove(String action){
+        if(action.equals("left")) {
+
+            if ((block.checkLeft() == 0) || ((block.getShape().length + block.getY()) * kvadrat == 600)) {
+                return;
+            } else {
+                block.goLeft();
+                repaint();
+            }
+        }
+
+        if(action.equals("right")){
+            if(((block.checkRight() + block.getShape()[0].length == column))  || ((block.getShape().length + block.getY()) * kvadrat == 600)){
+                return;
+            } else {
+                block.goRight();
+                repaint();
+            }
+
+        }
+
+        if(action.equals("down")){
+
+            if((block.getShape().length + block.getY()) * kvadrat == 600){
+                return;
+            } else {
+                block.goDown();
+                repaint();
+            }
+        }
+
+        if(action.equals("space")){
+            while((block.getShape().length + block.getY()) * kvadrat < 600){
+                block.goDown();
+            }
+            repaint();
+        }
+
+        //up knappen är inte fixat än. Den behöver göras. Dess syfte är att blocken ska rotera.
+        if(action.equals("up")){
+            block.rotateBlock();
+            repaint();
+        }
+
+    }
+
     private void addColorToBoard(){
         int y = block.getY();
         int x = block.getX();
@@ -74,9 +119,11 @@ public class Spelplan extends JPanel{
 
         for(int row = 0; row < shape.length; row++){
             for (int col = 0; col < shape[0].length; col++){
-                if(block.getShape()[row][col] == 1){
+                if(shape[row][col] == 1){
                     board[y + row][x + col] = block.getColor();
                 }
+                /*TODO: To make the block stay on each other, everytime when the color add to the board check
+                if that board coordinate contain a color. If it does put the block one column above the previous one.*/
             }
         }
     }
@@ -96,7 +143,7 @@ public class Spelplan extends JPanel{
         vi skickar in kvadrat som argument är eftersom vi har initierat längden på kvadraten
         lite längre upp. Eftersom en kvadrat är lika långt på både höjden och bredden, så
         skickar vi in storleken på kvadrat på width och height.
-         */
+        */
         for(int width = 0; width < column; width++){
             for(int height = 0; height < row; height++){
                 if (board[height][width] != null) {
@@ -134,6 +181,4 @@ public class Spelplan extends JPanel{
             }
         }
     }
-
-
 }
