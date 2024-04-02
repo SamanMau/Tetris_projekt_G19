@@ -6,15 +6,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TopPanel extends JPanel {
-    private JButton startaSpel = new JButton("Starta spel");
-    private JButton visaHighScore = new JButton("Visa highscore");
-    private JButton avslutaSpel = new JButton("Avsluta spel");
+    private JButton startGame = new JButton("Starta spel");
+    private JButton showHighscore = new JButton("Visa highscore");
+    private JButton endGame = new JButton("Avsluta spel");
     private Spelplan spelplan;
 
-    public TopPanel(Spelplan spelplan){
+    private boolean gameStarted;
+
+    private MainFrame mainFrame;
+
+    public TopPanel(Spelplan spelplan, MainFrame mainFrame){
         this.setPreferredSize(new Dimension(600, 100));
         this.setBackground(Color.gray);
+
+        this.mainFrame = mainFrame;
         this.spelplan = spelplan;
+
         CreateBtn();
         this.setLayout(null);
         this.setVisible(true);
@@ -25,31 +32,46 @@ public class TopPanel extends JPanel {
     }
 
     private void CreateBtn(){
-        startaSpel.setBounds(247, 28, 95, 35);
+        startGame.setBounds(247, 28, 95, 35);
         Color green = new Color(0, 128, 60, 157);
-        startaSpel.setBackground(green);
-        startaSpel.setFocusPainted(false);
+        startGame.setBackground(green);
+        startGame.setFocusPainted(false);
+        startGame.setFocusable(false);
 
-        startaSpel.addActionListener(new ActionListener() {
+        startGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 spelplan.startTimer(true);
+                mainFrame.linkButtonToEvent(true);
+                gameStarted = true;
             }
         });
 
-        this.add(startaSpel);
+        this.add(startGame);
 
-        visaHighScore.setBounds(147, 64, 120, 35);
+        showHighscore.setBounds(147, 64, 120, 35);
         Color orange = new Color(167, 112, 50);
-        visaHighScore.setBackground(orange);
-        visaHighScore.setFocusPainted(false);
-        this.add(visaHighScore);
+        showHighscore.setBackground(orange);
+        showHighscore.setFocusPainted(false);
+        this.add(showHighscore);
 
-        avslutaSpel.setBounds(335, 64, 115, 35);
+        endGame.setBounds(335, 64, 115, 35);
         Color red = new Color(192, 30, 30);
-        avslutaSpel.setBackground(red);
-        avslutaSpel.setFocusPainted(false);
-        this.add(avslutaSpel);
+        endGame.setBackground(red);
+        //  avslutaSpel.setFocusPainted(false);
+
+        endGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(gameStarted){
+                    spelplan.stopTimer();
+                    gameStarted = false;
+                } else {
+                    return;
+                }
+            }
+        });
+        this.add(endGame);
 
 
     }
