@@ -23,16 +23,76 @@ public class Spelplan extends JPanel{
     private boolean collision;
     private boolean gameState = false;
 
+
     public Spelplan(){
         this.setPreferredSize(new Dimension(300, 600));
         this.setBackground(Color.BLACK);
+
+         /*
+        I vår inputMap så lägger vi till key strokes. En key stroke är en händelse
+        som exekveras beroende på vilken tangent bord knapp har tryckts. Detta koncept
+        ska användas för att kunna hantera blocken (höger, vänster, ner, rotera) med hjälp av pilar
+         */
+
         listOfBlocksObj = new ListOfBlocks(); //For testing , should be in controller
         this.listOfBlocks = listOfBlocksObj.getBlockList(); //For testing , should be in controller
+
         this.setLayout(null);
         this.setVisible(true);
+
         block = listOfBlocks.get(randomNum);
+
         collision = false;
-       // startTimer();
+        //startTimer(true);
+    }
+
+    public void stopTimer(){
+        this.speed.stop();
+    }
+
+    public void decideMove(String action){
+        if(action.equals("left")) {
+
+            if ((block.checkLeft() == 0) || ((block.getShape().length + block.getY()) * kvadrat == 600)) {
+                return;
+            } else {
+                block.goLeft();
+                repaint();
+            }
+        }
+
+        if(action.equals("right")){
+            if(((block.checkRight() + block.getShape()[0].length == column))  || ((block.getShape().length + block.getY()) * kvadrat == 600)){
+                return;
+            } else {
+                block.goRight();
+                repaint();
+            }
+
+        }
+
+        if(action.equals("down")){
+
+            if((block.getShape().length + block.getY()) * kvadrat == 600){
+                return;
+            } else {
+                block.goDown();
+                repaint();
+            }
+        }
+
+        if(action.equals("space")){
+            while((block.getShape().length + block.getY()) * kvadrat < 600){
+                block.goDown();
+            }
+            repaint();
+        }
+
+        if(action.equals("up")){
+            block.rotateBlock();
+            repaint();
+        }
+
     }
 
     public void startTimer(boolean gameState){
@@ -42,8 +102,10 @@ public class Spelplan extends JPanel{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(collision){
-                        generateNewBlock();
+                       // generateNewBlock();
+                        return;
                     }
+
                     if((block.getShape().length + block.getY()) * kvadrat == 600){
                         collision = true;
                       //  generateNewBlock();
@@ -57,7 +119,6 @@ public class Spelplan extends JPanel{
             });
             this.speed.start();
         }
-
     }
 
     private void drawBlock(Graphics g, TetrisBlock block) {

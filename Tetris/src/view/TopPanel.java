@@ -11,10 +11,17 @@ public class TopPanel extends JPanel {
     private JButton avslutaSpel = new JButton("Avsluta spel");
     private Spelplan spelplan;
 
-    public TopPanel(Spelplan spelplan){
+    private boolean gameStarted;
+
+    private MainFrame mainFrame;
+
+    public TopPanel(Spelplan spelplan, MainFrame mainFrame){
         this.setPreferredSize(new Dimension(600, 100));
         this.setBackground(Color.gray);
+
+        this.mainFrame = mainFrame;
         this.spelplan = spelplan;
+
         CreateBtn();
         this.setLayout(null);
         this.setVisible(true);
@@ -29,11 +36,14 @@ public class TopPanel extends JPanel {
         Color green = new Color(0, 128, 60, 157);
         startaSpel.setBackground(green);
         startaSpel.setFocusPainted(false);
+        startaSpel.setFocusable(false);
 
         startaSpel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 spelplan.startTimer(true);
+                mainFrame.linkButtonToEvent(true);
+                gameStarted = true;
             }
         });
 
@@ -48,7 +58,19 @@ public class TopPanel extends JPanel {
         avslutaSpel.setBounds(335, 64, 115, 35);
         Color red = new Color(192, 30, 30);
         avslutaSpel.setBackground(red);
-        avslutaSpel.setFocusPainted(false);
+      //  avslutaSpel.setFocusPainted(false);
+
+        avslutaSpel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(gameStarted){
+                    spelplan.stopTimer();
+                    gameStarted = false;
+                } else {
+                    return;
+                }
+            }
+        });
         this.add(avslutaSpel);
 
 

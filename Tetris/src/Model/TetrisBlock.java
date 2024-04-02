@@ -50,4 +50,27 @@ public class TetrisBlock  {
         this.y = -2;
     }
 
+    public void goRight(){
+        x++;
+    }
+
+    public void goLeft(){
+        x--;
+    }
+
+    public void goDown(){
+        y++;
+    }
+
+    public int checkLeft(){
+       return x;
+    }
+
+    public int checkRight(){
+       return x;
+    }
+    public void rotateBlock(){
+
+    }
+
 }
