@@ -88,6 +88,7 @@ public class Spelplan extends JPanel{
             repaint();
         }
 
+        //up knappen är inte fixat än. Den behöver göras. Dess syfte är att blocken ska rotera.
         if(action.equals("up")){
             block.rotateBlock();
             repaint();
@@ -98,7 +99,7 @@ public class Spelplan extends JPanel{
     public void startTimer(boolean gameState){
         this.gameState = gameState;
         if(gameState){
-            this.speed = new Timer(200, new ActionListener() {
+            this.speed = new Timer(400, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(collision){
