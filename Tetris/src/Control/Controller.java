@@ -169,14 +169,12 @@ public class Controller{
             playfield.repaint();
         }
 
-        /*
-        TODO: If the action equals "up", then the block should rotate. This needs to be fixed,
-        as this feature is not implemented yet.
-         */
         if(action.equals("up")){
-            block.rotateBlock();
+            block.rotationBlock();
             playfield.repaint();
         }
+
+
 
     }
 
