@@ -27,7 +27,6 @@ public class TetrisBlock  {
        this.x = 4;
        this.y = 0;
        tempBlock = new int[shape[0].length][shape.length];
-       rotationBlock();
    }
 
     //Skriv ut tBlock
@@ -48,6 +47,8 @@ public class TetrisBlock  {
                 tempBlock[row][tempBlock[0].length-1] = temp;
             }
         }
+
+        this.shape = tempBlock;
     }
 
    //the number 4 stands for the total rotations that can be made when rotating a block, 90*4
