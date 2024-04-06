@@ -14,7 +14,7 @@ public class TetrisBlock  {
     private int currentBlockRotation;
     private int x; // is used to determine where in the game plan the tetris block is going to move in the x coordinate.
     private int y; // is used to determine where in the game plan the tetris block is going to move in the y coordinate.
-
+    private int rotateNum;
     int[][] tempBlock;
 
     /**
@@ -26,29 +26,66 @@ public class TetrisBlock  {
        createBlock(shape, color);
        this.x = 4;
        this.y = 0;
-       tempBlock = new int[shape[0].length][shape.length];
+        rotateNum = getRotateNum();
    }
 
     //Skriv ut tBlock
     public void rotationBlock() {
+        if(rotateNum == 2){
+            tempBlock = rotate2();
+        }
+        else{
+            tempBlock = rotate1();
+        }
+        this.shape = tempBlock;
+    }
+
+    public int[][] rotate1(){
         int[][] tempBlock = new int[shape[0].length][shape.length];
         //Save the currentBlock to a tempBlock array
-        for(int col = shape[0].length - 1; col >= 0 ; col--){
+        for(int col = 0; col < shape[0].length ; col++){
             for(int row = 0; row < shape.length; row++){
                 tempBlock[col][row] = shape[row][col];
             }
         }
-
-        //Flip tempBlock horizontally
+        if(tempBlock[0].length > tempBlock.length){
+            //Flip tempBlock
+            for(int row = 0; row < tempBlock.length-1; row++){
+                for(int col = 0; col < tempBlock[0].length; col++){
+                    int temp = tempBlock[row][col];
+                    tempBlock[row][col] = tempBlock[tempBlock.length - 1][col];
+                    tempBlock[tempBlock.length - 1][col] = temp;
+                }
+            }
+        }
+        return tempBlock;
+    }
+    public int[][] rotate2(){
+        int[][] tempBlock = new int[shape[0].length][shape.length];
+        //Save the currentBlock to a tempBlock array
+        for(int col = 0; col < shape[0].length ; col++){
+            for(int row = 0; row < shape.length; row++){
+                tempBlock[col][row] = shape[row][col];
+            }
+        }
         for(int row = 0; row < tempBlock.length; row++){
-            for(int col = 0; col < tempBlock[0].length - 1; col++){
+            for(int col = 0; col < tempBlock[0].length; col++){
+                if(col == 1){
+                    continue;
+                }
                 int temp = tempBlock[row][col];
                 tempBlock[row][col] = tempBlock[row][tempBlock[0].length-1];
                 tempBlock[row][tempBlock[0].length-1] = temp;
             }
         }
+        return tempBlock;
+    }
 
-        this.shape = tempBlock;
+    public int getRotateNum(){
+       if(shape.length > shape[0].length){
+            return 2;
+       }
+       return 0;
     }
 
    //the number 4 stands for the total rotations that can be made when rotating a block, 90*4
