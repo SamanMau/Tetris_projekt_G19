@@ -75,13 +75,14 @@ public class TopPanel extends JPanel {
         endGame.setBounds(335, 64, 115, 35);
         Color red = new Color(192, 30, 30);
         endGame.setBackground(red);
-        //  avslutaSpel.setFocusPainted(false);
+        endGame.setFocusPainted(false);
 
         endGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(gameStarted){
                     controller.stopTimer();
+                    controller.endGame();
                     gameStarted = false;
                 } else {
                     return;

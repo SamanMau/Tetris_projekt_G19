@@ -13,27 +13,30 @@ public class BottomPanel extends JPanel {
     public BottomPanel(){
         this.setPreferredSize(new Dimension(600, 103));
         this.setBackground(Color.gray);
-       // createImage();
+        createImage();
 
         this.setVisible(true);
 
     }
 
-    /*
+
     public void createImage(){
 
         try{
-            testImage = ImageIO.read(new File("bilder/image.png"));
-            JLabel label = new JLabel(new ImageIcon(testImage));
+            ImageIcon image = new ImageIcon("src/Bilder/Tetris_logo.png");
+            Image oldSize = image.getImage();
+            Image changedSize = oldSize.getScaledInstance(90, 80, Image.SCALE_AREA_AVERAGING);
+            ImageIcon newSize = new ImageIcon(changedSize);
+
+
+            JLabel label = new JLabel(newSize);
+
             this.add(label);
+
         } catch (NullPointerException e){
             System.out.println("error");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
-
-     */
 
 
     /*

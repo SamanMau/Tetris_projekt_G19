@@ -66,6 +66,13 @@ public class Controller{
         }
     }
 
+    public void endGame(){
+        /* TODO: Kunna avsluta spelet. Block ska sluta falla ner
+            och de befintliga tetris blocken som finns på spelplanen
+            ska rensas.
+         */
+    }
+
     /**
      * Generates a random number between 0 - 6. This random generated number
      * is then used to get a tetris block from an index. We retrieve its shape
