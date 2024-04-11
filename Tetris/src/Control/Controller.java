@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Controller{
+public class Controller {
     private ListOfBlocks listOfBlocksObj;
     private ArrayList<int[][]> listOfShape;
     private ArrayList<Color> listOfColors;
@@ -31,7 +31,8 @@ public class Controller{
     private boolean gameState = false;
     private Playfield playfield;
     private MainFrame mainFrame;
-    public Controller(){
+
+    public Controller() {
         this.playfield = new Playfield(this);
         mainFrame = new MainFrame(this, playfield);
         listOfBlocksObj = new ListOfBlocks();
@@ -41,23 +42,23 @@ public class Controller{
         collision = false;
     }
 
-    public void startTimer(boolean gameState){
+    public void startTimer(boolean gameState) {
         this.gameState = gameState;
-        if(gameState){
+        if (gameState) {
             this.speed = new Timer(200, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(collision){
+                    if (collision) {
                         addColorToBoard();
                         generateBlock();
                         collision = false;
-                    }
-                    if((block.getShape().length + block.getY()) * kvadrat == 600){
-                        collision = true;
-                    }
-                    else{
-                        block.incrementY();
-                        collision = false;
+                    } else {
+                            if (isAtBottom() || isCollidingWithBlock()) {
+                                addColorToBoard();
+                               // generateBlock();
+                            } else {
+                                block.incrementY();
+                            }
                     }
                     playfield.repaint();
                 }
@@ -66,12 +67,49 @@ public class Controller{
         }
     }
 
+    //Den här metoden kontrollerar ifall det aktuella blocket har nått botten av spelplanen
+    private boolean isAtBottom() {
+       // block getY(),  hämtar den aktuella y-posisionen för det aktuella blocket på spelplanen
+      //  block.getShape().length, Hämtar höjden på det aktuella blocket på spelplanen
+        //Först beräknas den potentiella positionen för botten av blocket
+        //Sedan jämförs den beräknade position med längden av spelplanen
+        //Om position är större eller lika med längeden på spelplan, innebär att blocket har nått botten eller passerat botten av spelplan
+        return (block.getY() + block.getShape().length) * kvadrat >= board.length * kvadrat;
+    }
+
+    private boolean isCollidingWithBlock() {
+        int y = block.getY(); // Get the Y-coordinate of the block's position on the board
+        int x = block.getX(); // Get the X-coordinate of the block's position on the board
+        int[][] shape = block.getShape(); // Get the shape of the block
+
+        // Loop through each cell of the block shape
+        for (int row = 0; row < shape.length; row++) {
+            for (int col = 0; col < shape[0].length; col++) {
+                /*If the cell of the block at row and col contain 1,
+                 set the board at Y-coordinate and X-coordinate to the color of the block*/
+                if (shape[row][col] == 1) {
+                    int boardRow = y + row;
+                    int boardCol = x + col;
+
+                    // Denna if-sats ser till att blocken inte går utanför spelplan
+                    // Om boardRow + 1 är mindre än board.length innebär att det
+                    // finns minst en rad kvar under den aktuella raden på spelplanen
+                    // board[boardRow + 1][boardCol] != null, kontrollera om det finns block i nästa rad under det aktuella blocket
+                    // Om både villkoren uppfylls returnerar true, alltså att det finns collision annars false
+                    if (boardRow + 1 < board.length && board[boardRow + 1][boardCol] != null) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
     /**
      * Generates a random number between 0 - 6. This random generated number
      * is then used to get a tetris block from an index. We retrieve its shape
      * and color, and then we create a new instance of "block".
      */
-    public void generateBlock(){
+    public void generateBlock() {
         randomNum = rd.nextInt(7);
         int[][] shape = listOfShape.get(randomNum);
         Color color = listOfColors.get(randomNum);
@@ -83,7 +121,7 @@ public class Controller{
      *
      * @return a tetris block
      */
-    public TetrisBlock getBlock(){
+    public TetrisBlock getBlock() {
         return block;
     }
 
@@ -92,24 +130,31 @@ public class Controller{
      * This method loops through each cell of the block shape,
      * check its position on the board, and sets the board cell to the block color.
      */
-    public void addColorToBoard(){
+    public void addColorToBoard() {
         int y = block.getY(); // Get the Y-coordinate of the block's position on the board
         int x = block.getX(); // Get the X-coordinate of the block's position on the board
         int[][] shape = block.getShape(); // Get the shape of the block
 
         // Loop through each cell of the block shape
-        for(int row = 0; row < shape.length; row++){
-            for (int col = 0; col < shape[0].length; col++){
+        for (int row = 0; row < shape.length; row++) {
+            for (int col = 0; col < shape[0].length; col++) {
                 /*If the cell of the block at row and col contain 1,
                  set the board at Y-coordinate and X-coordinate to the color of the block*/
-                if(shape[row][col] == 1){
-                    board[y + row][x + col] = block.getColor();
+                if (shape[row][col] == 1) {
+                    int boardRow = y + row;
+                    int boardCol = x + col;
+                    //Den kontrollerar att blocken inte går utanför spelplanen
+                    //Om platsen vi ska gå till innehåller redan block (dvs den är inte null) så fortsätter loopen uppåt
+                        board[boardRow][boardCol] = block.getColor();
                 }
-                /*TODO: To make the block stay on each other, everytime when the color add to the board check
-                if that board coordinate contain a color. If it does put the block one column above the previous one.*/
             }
         }
+        collision = true;
     }
+
+
+     /*TODO: To make the block stay on each other, everytime when the color add to the board check
+                if that board coordinate contain a color. If it does put the block one column above the previous one.*/
 
     /**
      * Return a game board.
