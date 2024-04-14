@@ -44,7 +44,7 @@ public class Controller{
     public void startTimer(boolean gameState){
         this.gameState = gameState;
         if(gameState){
-            this.speed = new Timer(200, new ActionListener() {
+            this.speed = new Timer(400, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(collision){
