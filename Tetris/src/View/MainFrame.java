@@ -1,5 +1,5 @@
 /**
- * This class represents the main frame of our GUI. Thiz class is responsible for
+ * This class represents the main frame of our GUI. This class is responsible for
  * adding the different panels (LPanel, RPanel, Playfield etc.) to the GUI.
  * This class also manages the creation of keys and links them to actions.
  * The main objects used to create keys is "InputMap" and "ActionMap".

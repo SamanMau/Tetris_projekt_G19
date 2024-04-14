@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class TopPanel extends JPanel {
     private JButton startGame = new JButton("Start game");
     private JButton showHighscore = new JButton("Show highscore");
-    private JButton endGame = new JButton("End spel");
+    private JButton endGame = new JButton("End game");
     private Playfield playfield;
 
     private boolean gameStarted;
@@ -70,6 +70,7 @@ public class TopPanel extends JPanel {
         Color orange = new Color(167, 112, 50);
         showHighscore.setBackground(orange);
         showHighscore.setFocusPainted(false);
+
         this.add(showHighscore);
 
         endGame.setBounds(335, 64, 115, 35);
