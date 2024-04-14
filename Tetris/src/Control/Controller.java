@@ -53,17 +53,42 @@ public class Controller {
                         generateBlock();
                         collision = false;
                     } else {
+                        boolean checkBlockInPlayfield = checkBlockOutOfPlayfield();
+                        if(checkBlockInPlayfield){
                             if (isAtBottom() || isCollidingWithBlock()) {
                                 addColorToBoard();
-                               // generateBlock();
                             } else {
                                 block.incrementY();
                             }
+                        }
+                        else{
+                             stopTimer();
+                        }
                     }
                     playfield.repaint();
                 }
             });
             this.speed.start();
+        }
+    }
+
+    private boolean checkBlockOutOfPlayfield(){
+        int blockHeight = block.getHeight();
+        int rowWithColor = 0;
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[0].length; col++) {
+                if(board[row][col] != null){
+                    rowWithColor++;
+                    break;
+                }
+            }
+        }
+        if(blockHeight + rowWithColor > board.length){
+            System.out.println("You lost");
+            return false;
+        }
+        else{
+            return true;
         }
     }
 

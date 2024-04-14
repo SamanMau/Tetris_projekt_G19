@@ -90,6 +90,10 @@ public class TetrisBlock  {
 
     }
 
+    public int getHeight(){
+        return shape.length;
+    }
+
 
 
 }
