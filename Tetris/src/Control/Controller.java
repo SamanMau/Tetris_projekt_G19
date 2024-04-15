@@ -55,17 +55,42 @@ public class Controller {
                         generateBlock();
                         collision = false;
                     } else {
+                        boolean checkBlockInPlayfield = checkBlockOutOfPlayfield();
+                        if(checkBlockInPlayfield){
                             if (isAtBottom() || isCollidingWithBlock()) {
                                 addColorToBoard();
-                               // generateBlock();
                             } else {
                                 block.incrementY();
                             }
+                        }
+                        else{
+                             stopTimer();
+                        }
                     }
                     playfield.repaint();
                 }
             });
             this.speed.start();
+        }
+    }
+
+    private boolean checkBlockOutOfPlayfield(){
+        int blockHeight = block.getHeight();
+        int rowWithColor = 0;
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[0].length; col++) {
+                if(board[row][col] != null){
+                    rowWithColor++;
+                    break;
+                }
+            }
+        }
+        if(blockHeight + rowWithColor > board.length){
+            System.out.println("You lost");
+            return false;
+        }
+        else{
+            return true;
         }
     }
 
@@ -179,52 +204,40 @@ public class Controller {
      * statement is not correct, then the block is moved to the relevant location.
      * @param action represents what key has been pressed.
      */
-    public void decideMove(String action){
-        if(action.equals("left")) {
+    public void decideMove(String action) {
 
-            if ((block.checkLeft() == 0) || ((block.getShape().length + block.getY()) * kvadrat == 600)) {
+        if (action.equals("left")) {
+            if ((block.getX() == 0) || isAtBottom() || isCollidingWithBlock()) {
                 return;
-            } else {
-                block.goLeft();
-                playfield.repaint();
             }
-        }
-
-        if(action.equals("right")){
-            if(((block.checkRight() + block.getShape()[0].length == column))  || ((block.getShape().length + block.getY()) * kvadrat == 600)){
+            block.goLeft();
+        } else if (action.equals("right")) {
+            if ((block.getX() + block.getShape()[0].length >= column) || isAtBottom() || isCollidingWithBlock()) {
                 return;
-            } else {
-                block.goRight();
-                playfield.repaint();
             }
-        }
+            block.goRight();
+        } else if (action.equals("down") || action.equals("space")) {
 
-        if(action.equals("down")){
-
-            if((block.getShape().length + block.getY()) * kvadrat == 600){
-                return;
-            } else {
+            do {
                 block.goDown();
-                playfield.repaint();
+            } while (action.equals("space") && !isAtBottom() && !isCollidingWithBlock());
+
+            if (isAtBottom() || isCollidingWithBlock()) {
+                addColorToBoard();
+                generateBlock();
+                restartGameLogic();
             }
-        }
 
-        if(action.equals("space")){
-            while((block.getShape().length + block.getY()) * kvadrat < 600){
-                block.goDown();
-            }
-            playfield.repaint();
+        } else if (action.equals("up")) {
+            block.rotationBlock();
         }
-
-        /*
-        TODO: If the action equals "up", then the block should rotate. This needs to be fixed,
-        as this feature is not implemented yet.
-         */
-        if(action.equals("up")){
-            block.rotateBlock();
-            playfield.repaint();
+        playfield.repaint();
+    }
+    private void restartGameLogic(){
+        collision = false;
+        if (!gameState) {
+            startTimer(true);
         }
-
     }
 
 }
