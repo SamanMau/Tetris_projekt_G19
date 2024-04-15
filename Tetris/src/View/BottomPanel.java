@@ -28,7 +28,6 @@ public class BottomPanel extends JPanel {
             Image changedSize = oldSize.getScaledInstance(90, 80, Image.SCALE_AREA_AVERAGING);
             ImageIcon newSize = new ImageIcon(changedSize);
 
-
             JLabel label = new JLabel(newSize);
 
             this.add(label);
