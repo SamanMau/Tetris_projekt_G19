@@ -227,8 +227,7 @@ public class Controller {
             }
 
         } else if (action.equals("up")) {
-            block.rotateBlock();
-
+            block.rotationBlock();
         }
         playfield.repaint();
     }

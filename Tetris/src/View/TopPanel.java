@@ -5,15 +5,19 @@ package View;
 
 import Control.Controller;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class TopPanel extends JPanel {
     private JButton startGame = new JButton("Start game");
     private JButton showHighscore = new JButton("Show highscore");
     private JButton endGame = new JButton("End spel");
+    private JButton playMusic = new JButton("Music");
     private Playfield playfield;
 
     private boolean gameStarted;
@@ -21,6 +25,9 @@ public class TopPanel extends JPanel {
     private MainFrame mainFrame;
 
     private Controller controller;
+
+    private soundEffect se= new soundEffect();
+    private String music, musicOff;
 
     /**
      * Constructor that sets a dimension for the panel and a color.
@@ -89,6 +96,63 @@ public class TopPanel extends JPanel {
             }
         });
         this.add(endGame);
+
+        playMusic.setBounds(400,28,100,40);
+        playMusic.setFocusPainted(false);
+        playMusic.setFocusable(false);
+        playMusic.setActionCommand("gameMusic");
+        music = "src/Ljud/dark.wav";
+        musicOff ="off";
+
+        playMusic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                String btnPressed = actionEvent.getActionCommand();
+                if (musicOff.equals("off")) {
+                    se.setFile(music);
+                    se.playTheSong();
+                    musicOff = "on";
+                    playMusic.setText("music on");
+                }
+                else if (musicOff.equals("on")) {
+                    se.stop();
+                    musicOff = ("off");
+                    playMusic.setText("music off");
+                }
+            }
+        });
+        this.add(playMusic);
     }
+
+    public class soundEffect{
+        Clip clip;
+        public void setFile(String SoundFileName) {
+            try {
+                File file = new File(SoundFileName);
+                AudioInputStream sound = AudioSystem.getAudioInputStream(file);
+                clip = AudioSystem.getClip();
+                clip.open(sound);
+            } catch (UnsupportedAudioFileException e) {
+                throw new RuntimeException(e);
+            } catch (LineUnavailableException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        public void playTheSong(){
+            clip.start();
+        }
+
+        public void loop(){
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+
+        public void stop(){
+            clip.stop();
+            clip.close();
+        }
+    }
+
 
 }
