@@ -90,6 +90,9 @@ public class TetrisBlock  {
 
     }
 
+    public void incrementY(int i) {
+    }
+
     public int getHeight(){
         return shape.length;
     }
