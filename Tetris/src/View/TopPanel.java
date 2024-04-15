@@ -4,6 +4,7 @@
 package View;
 
 import Control.Controller;
+import View.Settings.SettingsFrame;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -16,9 +17,10 @@ import java.io.IOException;
 public class TopPanel extends JPanel {
     private JButton startGame = new JButton("Start game");
     private JButton showHighscore = new JButton("Show highscore");
-    private JButton playMusic = new JButton("Music");
+    private JButton playMusic = new JButton("Music on");
     private JButton endGame = new JButton("End game");
     private Playfield playfield;
+    private JButton settings = new JButton("Settings");
 
     private boolean gameStarted;
 
@@ -98,12 +100,16 @@ public class TopPanel extends JPanel {
         });
         this.add(endGame);
 
-        playMusic.setBounds(400,28,100,40);
+        playMusic.setBounds(0,0,100,35);
+        playMusic.setBackground(Color.WHITE);
         playMusic.setFocusPainted(false);
         playMusic.setFocusable(false);
         playMusic.setActionCommand("gameMusic");
         music = "src/Ljud/dark.wav";
-        musicOff ="off";
+        musicOff ="on";
+
+        se.setFile(music);
+        se.playTheSong();
 
         playMusic.addActionListener(new ActionListener() {
             @Override
@@ -113,16 +119,30 @@ public class TopPanel extends JPanel {
                     se.setFile(music);
                     se.playTheSong();
                     musicOff = "on";
-                    playMusic.setText("music on");
+                    playMusic.setText("Music on");
                 }
                 else if (musicOff.equals("on")) {
                     se.stop();
                     musicOff = ("off");
-                    playMusic.setText("music off");
+                    playMusic.setText("Music off");
                 }
             }
         });
         this.add(playMusic);
+
+        settings.setBounds(500, 0, 100, 35);
+        settings.setBackground(Color.WHITE);
+        settings.setFocusable(false);
+
+        settings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SettingsFrame settingsFrame = new SettingsFrame(controller, mainFrame);
+            }
+        });
+
+
+        this.add(settings);
     }
 
     public class soundEffect{
