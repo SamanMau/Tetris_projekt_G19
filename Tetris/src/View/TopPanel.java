@@ -16,7 +16,6 @@ import java.io.IOException;
 public class TopPanel extends JPanel {
     private JButton startGame = new JButton("Start game");
     private JButton showHighscore = new JButton("Show highscore");
-    private JButton endGame = new JButton("End spel");
     private JButton playMusic = new JButton("Music");
     private JButton endGame = new JButton("End game");
     private Playfield playfield;
