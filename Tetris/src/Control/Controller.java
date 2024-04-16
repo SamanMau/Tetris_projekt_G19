@@ -3,6 +3,7 @@
  */
 package Control;
 
+import Model.IncorrectFormatException;
 import Model.ListOfBlocks;
 import Model.TetrisBlock;
 import View.MainFrame;
@@ -12,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -42,6 +44,26 @@ public class Controller {
         collision = false;
     }
 
+    public void chooseOwnSong(){
+        JFileChooser fileChooser = new JFileChooser();
+        int openDialog = fileChooser.showSaveDialog(null);
+
+        try {
+            if(openDialog == 0){
+                File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                String name = file.toString();
+
+                if(!(name.endsWith(".wav"))){
+                    throw new IncorrectFormatException("The file type needs to be .wav");
+                } else {
+                    mainFrame.sendFileToTopPanel(name);
+                }
+            }
+        } catch (IncorrectFormatException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
     public void startTimer(boolean gameState) {
         this.gameState = gameState;
         if(gameState){
