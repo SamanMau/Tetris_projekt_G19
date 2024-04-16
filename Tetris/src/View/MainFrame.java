@@ -24,29 +24,33 @@ public class MainFrame extends JFrame{
     private Playfield playfield;
     private ActionMap action;
     private Controller controller;
+    private TopPanel topPanel;
+    private LPanel lPanel;
+    private RPanel rPanel;
+    private BottomPanel bottomPanel;
 
     public MainFrame(Controller controller, Playfield playfield){
         super("Tetris");
         this.controller = controller;
         this.setSize(width, height);
         this.playfield = playfield;
-        TopPanel tp = new TopPanel(playfield, this, controller);
-        LPanel lp = new LPanel();
-        RPanel rp = new RPanel();
-        BottomPanel bp = new BottomPanel();
+        topPanel = new TopPanel(playfield, this, controller);
+        lPanel = new LPanel();
+        rPanel = new RPanel();
+        bottomPanel = new BottomPanel();
 
         //Add panel
-        this.add(lp, BorderLayout.WEST);
-        this.add(rp, BorderLayout.EAST);
-        this.add(tp, BorderLayout.NORTH);
-        this.add(bp, BorderLayout.SOUTH);
+        this.add(lPanel, BorderLayout.WEST);
+        this.add(rPanel, BorderLayout.EAST);
+        this.add(topPanel, BorderLayout.NORTH);
+        this.add(bottomPanel, BorderLayout.SOUTH);
         this.add(playfield, BorderLayout.CENTER);
 
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
 
-        createKeys();
+        createKeys("LEFT", "RIGHT", "UP", "DOWN", "SPACE");
     }
 
     /**
@@ -54,15 +58,18 @@ public class MainFrame extends JFrame{
      * The parameter you see marked as "s" right after "getKeyStroke" represents the name of the key on your keyboard,
      * while "actionMapKey" is the identifier.
      */
-    public void createKeys(){
+    public void createKeys(String left, String right, String up, String down, String space){
+        InputMap key;
+
         key = this.getRootPane().getInputMap();
         action = this.getRootPane().getActionMap();
-        
-        key.put(KeyStroke.getKeyStroke("LEFT"), "leftKey");
-        key.put(KeyStroke.getKeyStroke("SPACE"), "spaceKey");
-        key.put(KeyStroke.getKeyStroke("DOWN"), "downKey");
-        key.put(KeyStroke.getKeyStroke("RIGHT"), "rightKey");
-        key.put(KeyStroke.getKeyStroke("UP"), "upKey");
+
+        key.put(KeyStroke.getKeyStroke(left), "leftKey");
+        key.put(KeyStroke.getKeyStroke(space), "spaceKey");
+        key.put(KeyStroke.getKeyStroke(down), "downKey");
+        key.put(KeyStroke.getKeyStroke(right), "rightKey");
+        key.put(KeyStroke.getKeyStroke(up), "upKey");
+
     }
     /**
      * Links specific keyboard inputs to actions to move the blocks.
@@ -110,5 +117,9 @@ public class MainFrame extends JFrame{
                 }
             });
         }
+    }
+
+    public void sendFileToTopPanel(String file){
+            topPanel.setNewMusic(file);
     }
 }

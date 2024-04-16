@@ -4,6 +4,7 @@
 package View;
 
 import Control.Controller;
+import View.Settings.SettingsFrame;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -16,16 +17,15 @@ import java.io.IOException;
 public class TopPanel extends JPanel {
     private JButton startGame = new JButton("Start game");
     private JButton showHighscore = new JButton("Show highscore");
-    private JButton playMusic = new JButton("Music");
+    private JButton playMusic = new JButton("Music on");
     private JButton endGame = new JButton("End game");
     private Playfield playfield;
+    private JButton settings = new JButton("Settings");
 
     private boolean gameStarted;
-
+    private Clip clip;
     private MainFrame mainFrame;
-
     private Controller controller;
-
     private soundEffect se= new soundEffect();
     private String music, musicOff;
 
@@ -98,39 +98,74 @@ public class TopPanel extends JPanel {
         });
         this.add(endGame);
 
-        playMusic.setBounds(400,28,100,40);
+        playMusic.setBounds(0,0,100,35);
+        playMusic.setBackground(Color.WHITE);
         playMusic.setFocusPainted(false);
         playMusic.setFocusable(false);
         playMusic.setActionCommand("gameMusic");
-        music = "src/Ljud/dark.wav";
-        musicOff ="off";
+        music = "src/Ljud/theme1.wav";
+        musicOff ="on";
+
+        se.setFile(music);
+        se.playTheSong();
 
         playMusic.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                String btnPressed = actionEvent.getActionCommand();
-                if (musicOff.equals("off")) {
-                    se.setFile(music);
-                    se.playTheSong();
-                    musicOff = "on";
-                    playMusic.setText("music on");
-                }
-                else if (musicOff.equals("on")) {
-                    se.stop();
-                    musicOff = ("off");
-                    playMusic.setText("music off");
-                }
+                checkIfPlay(musicOff);
             }
         });
         this.add(playMusic);
+
+        settings.setBounds(500, 0, 100, 35);
+        settings.setBackground(Color.WHITE);
+        settings.setFocusable(false);
+
+        settings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SettingsFrame settingsFrame = new SettingsFrame(controller, mainFrame, TopPanel.this);
+            }
+        });
+
+
+        this.add(settings);
+    }
+
+    public void checkIfPlay(String musicOff){
+        if (musicOff.equals("off")) {
+            se.setFile(music);
+            se.playTheSong();
+            this.musicOff = "on";
+            playMusic.setText("Music on");
+        }
+
+        else if (musicOff.equals("on")) {
+            se.stop();
+            this.musicOff = ("off");
+            playMusic.setText("Music off");
+        }
+    }
+
+    public void setNewMusic(String newSong){
+        clip.stop();
+        clip.close();
+        music = newSong;
+
+        if(musicOff.equals("on")){
+            se.setFile(music);
+            se.playTheSong();
+        }
+
     }
 
     public class soundEffect{
-        Clip clip;
+        File file;
+        AudioInputStream sound;
         public void setFile(String SoundFileName) {
             try {
-                File file = new File(SoundFileName);
-                AudioInputStream sound = AudioSystem.getAudioInputStream(file);
+                file = new File(SoundFileName);
+                sound = AudioSystem.getAudioInputStream(file);
                 clip = AudioSystem.getClip();
                 clip.open(sound);
             } catch (UnsupportedAudioFileException e) {
@@ -143,6 +178,8 @@ public class TopPanel extends JPanel {
         }
         public void playTheSong(){
             clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+
         }
 
         public void loop(){
