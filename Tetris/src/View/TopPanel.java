@@ -18,7 +18,6 @@ public class TopPanel extends JPanel {
     private JButton showHighscore = new JButton("Show highscore");
     private JButton endGame = new JButton("End spel");
     private JButton playMusic = new JButton("Music");
-    private JButton endGame = new JButton("End game");
     private Playfield playfield;
 
     private boolean gameStarted;
@@ -27,7 +26,7 @@ public class TopPanel extends JPanel {
 
     private Controller controller;
 
-    private soundEffect se= new soundEffect();
+    private soundEffect se = new soundEffect();
     private String music, musicOff;
 
     /**

@@ -44,10 +44,8 @@ public class Controller {
 
     public void startTimer(boolean gameState) {
         this.gameState = gameState;
- SpelLogik-försök
         if(gameState){
             this.speed = new Timer(400, new ActionListener() {
- main
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (collision) {
@@ -229,7 +227,9 @@ public class Controller {
             }
 
         } else if (action.equals("up")) {
-            block.rotationBlock();
+            if(!isCollidingWithBlock() && !isAtBottom()){
+                block.rotationBlock();
+            }
         }
         playfield.repaint();
     }
