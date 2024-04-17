@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
-
+//committar
 public class Controller {
     //halloj vi testar!
     private ListOfBlocks listOfBlocksObj;
