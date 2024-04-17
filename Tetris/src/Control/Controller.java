@@ -44,10 +44,10 @@ public class Controller {
 
     public void startTimer(boolean gameState) {
         this.gameState = gameState;
- SpelLogik-försök
+
         if(gameState){
             this.speed = new Timer(400, new ActionListener() {
- main
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (collision) {
@@ -148,6 +148,7 @@ public class Controller {
                     //Den kontrollerar att blocken inte går utanför spelplanen
                     //Om platsen vi ska gå till innehåller redan block (dvs den är inte null) så fortsätter loopen uppåt
                         board[boardRow][boardCol] = block.getColor();
+
                 }
             }
         }
@@ -179,10 +180,45 @@ public class Controller {
      * statement is not correct, then the block is moved to the relevant location.
      * @param action represents what key has been pressed.
      */
-    public void decideMove(String action){
-        if(action.equals("left")) {
+    public void decideMove(String action) {
 
-            if ((block.checkLeft() == 0) || ((block.getShape().length + block.getY()) * kvadrat == 600)) {
+        if (action.equals("left")) {
+            if ((block.getX() == 0) || isAtBottom() || isCollidingWithBlock()) {
+                return;
+            }
+            block.goLeft();
+        } else if (action.equals("right")) {
+            if ((block.getX() + block.getShape()[0].length >= column) || isAtBottom() || isCollidingWithBlock()) {
+                return;
+            }
+            block.goRight();
+        } else if (action.equals("down") || action.equals("space")) {
+
+            do {
+                block.goDown();
+            } while (action.equals("space") && !isAtBottom() && !isCollidingWithBlock());
+
+            if (isAtBottom() || isCollidingWithBlock()) {
+                block.incrementY(-1);
+                addColorToBoard();
+                generateBlock();
+                restartGameLogic();
+            }
+
+        } else if (action.equals("up")) {
+            block.rotateBlock();
+
+        }
+        playfield.repaint();
+    }
+    private void restartGameLogic(){
+        collision = false;
+        if (!gameState) {
+            startTimer(true);
+        }
+    }
+
+           /* if ((block.checkLeft() == 0) || ((block.getShape().length + block.getY()) * kvadrat == 600)) {
                 return;
             } else {
                 block.goLeft();
@@ -190,8 +226,8 @@ public class Controller {
             }
         }
 
-        if(action.equals("right")){
-            if(((block.checkRight() + block.getShape()[0].length == column))  || ((block.getShape().length + block.getY()) * kvadrat == 600)){
+        if (action.equals("right")) {
+            if (((block.checkRight() + block.getShape()[0].length == column)) || ((block.getShape().length + block.getY()) * kvadrat == 600)) {
                 return;
             } else {
                 block.goRight();
@@ -199,9 +235,9 @@ public class Controller {
             }
         }
 
-        if(action.equals("down")){
+        if (action.equals("down")) {
 
-            if((block.getShape().length + block.getY()) * kvadrat == 600){
+            if ((block.getShape().length + block.getY()) * kvadrat == 600) {
                 return;
             } else {
                 block.goDown();
@@ -209,8 +245,8 @@ public class Controller {
             }
         }
 
-        if(action.equals("space")){
-            while((block.getShape().length + block.getY()) * kvadrat < 600){
+        if (action.equals("space")) {
+            while ((block.getShape().length + block.getY()) * kvadrat < 600) {
                 block.goDown();
             }
             playfield.repaint();
@@ -219,12 +255,18 @@ public class Controller {
         /*
         TODO: If the action equals "up", then the block should rotate. This needs to be fixed,
         as this feature is not implemented yet.
-         */
-        if(action.equals("up")){
+
+        if (action.equals("up")) {
             block.rotateBlock();
             playfield.repaint();
-        }
+        }*/
 
-    }
+
 
 }
+
+
+/* To check if row is filled. Check the board color and see if its = to "default" (color that you start with). If true
+*  remove rows with color + add points + set the boards removed to regular color.
+*
+ */

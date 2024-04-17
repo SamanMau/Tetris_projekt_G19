@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63211fed-e990-4746-9cbb-13f735b406e4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Control/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/Control/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/TopPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/TopPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/TetrisBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/TetrisBlock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,9 +17,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2ed5CXVDA3791t7N0Y585YFhpmu" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -29,7 +29,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "SpelLogik-försök",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/bismakhan/Documents/GitHub/Tetris_projekt_G19/Tetris/src"
   }
 }]]></component>
