@@ -99,6 +99,8 @@ public class Controller {
         }
     }
 
+    //ttest
+
     private boolean checkBlockOutOfPlayfield(){
         int blockHeight = block.getHeight();
         int rowWithColor = 0;
