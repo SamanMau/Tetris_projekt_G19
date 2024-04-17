@@ -19,6 +19,7 @@ import java.util.Random;
 //committar
 public class Controller {
     //halloj vi testar!
+    //test
     private ListOfBlocks listOfBlocksObj;
     private ArrayList<int[][]> listOfShape;
     private ArrayList<Color> listOfColors;
@@ -98,6 +99,8 @@ public class Controller {
             this.speed.start();
         }
     }
+
+    //ttest
 
     private boolean checkBlockOutOfPlayfield(){
         int blockHeight = block.getHeight();
