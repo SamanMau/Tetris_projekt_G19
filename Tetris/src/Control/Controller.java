@@ -3,6 +3,7 @@
  */
 package Control;
 
+import Model.IncorrectFormatException;
 import Model.ListOfBlocks;
 import Model.TetrisBlock;
 import View.MainFrame;
@@ -12,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -42,12 +44,34 @@ public class Controller {
         collision = false;
     }
 
+    public void chooseOwnSong(){
+        JFileChooser fileChooser = new JFileChooser();
+        int openDialog = fileChooser.showSaveDialog(null);
+
+        try {
+            if(openDialog == 0){
+                File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                String name = file.toString();
+
+                if(!(name.endsWith(".wav"))){
+                    throw new IncorrectFormatException("The file type needs to be .wav");
+                } else {
+                    mainFrame.sendFileToTopPanel(name);
+                }
+            }
+        } catch (IncorrectFormatException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
     public void startTimer(boolean gameState) {
         this.gameState = gameState;
 
         if(gameState){
             this.speed = new Timer(400, new ActionListener() {
 
+        if(gameState){
+            this.speed = new Timer(400, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (collision) {
@@ -55,17 +79,42 @@ public class Controller {
                         generateBlock();
                         collision = false;
                     } else {
+                        boolean checkBlockInPlayfield = checkBlockOutOfPlayfield();
+                        if(checkBlockInPlayfield){
                             if (isAtBottom() || isCollidingWithBlock()) {
                                 addColorToBoard();
-                               // generateBlock();
                             } else {
                                 block.incrementY();
                             }
+                        }
+                        else{
+                             stopTimer();
+                        }
                     }
                     playfield.repaint();
                 }
             });
             this.speed.start();
+        }
+    }
+
+    private boolean checkBlockOutOfPlayfield(){
+        int blockHeight = block.getHeight();
+        int rowWithColor = 0;
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[0].length; col++) {
+                if(board[row][col] != null){
+                    rowWithColor++;
+                    break;
+                }
+            }
+        }
+        if(blockHeight + rowWithColor > board.length){
+            System.out.println("You lost");
+            return false;
+        }
+        else{
+            return true;
         }
     }
 
@@ -219,31 +268,43 @@ public class Controller {
     }
 
            /* if ((block.checkLeft() == 0) || ((block.getShape().length + block.getY()) * kvadrat == 600)) {
+=======
+>>>>>>> ac9b21f91d8a6009fb251b3c916c39102ab73879
                 return;
-            } else {
-                block.goLeft();
-                playfield.repaint();
             }
+<<<<<<< HEAD
         }
 
         if (action.equals("right")) {
             if (((block.checkRight() + block.getShape()[0].length == column)) || ((block.getShape().length + block.getY()) * kvadrat == 600)) {
+=======
+            block.goLeft();
+        } else if (action.equals("right")) {
+            if ((block.getX() + block.getShape()[0].length >= column) || isAtBottom() || isCollidingWithBlock()) {
+>>>>>>> ac9b21f91d8a6009fb251b3c916c39102ab73879
                 return;
-            } else {
-                block.goRight();
-                playfield.repaint();
             }
-        }
+            block.goRight();
+        } else if (action.equals("down") || action.equals("space")) {
 
+<<<<<<< HEAD
         if (action.equals("down")) {
 
             if ((block.getShape().length + block.getY()) * kvadrat == 600) {
                 return;
             } else {
+=======
+            do {
+>>>>>>> ac9b21f91d8a6009fb251b3c916c39102ab73879
                 block.goDown();
-                playfield.repaint();
+            } while (action.equals("space") && !isAtBottom() && !isCollidingWithBlock());
+
+            if (isAtBottom() || isCollidingWithBlock()) {
+                addColorToBoard();
+                generateBlock();
+                restartGameLogic();
             }
-        }
+
 
         if (action.equals("space")) {
             while ((block.getShape().length + block.getY()) * kvadrat < 600) {
@@ -261,6 +322,18 @@ public class Controller {
             playfield.repaint();
         }*/
 
+
+        } else if (action.equals("up")) {
+            block.rotationBlock();
+        }
+        playfield.repaint();
+    }
+    private void restartGameLogic(){
+        collision = false;
+        if (!gameState) {
+            startTimer(true);
+        }
+    }
 
 
 }
