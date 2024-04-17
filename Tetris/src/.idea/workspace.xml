@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="63211fed-e990-4746-9cbb-13f735b406e4" name="Changes" comment="">
+    <list default="true" id="c3233aee-d755-4207-98e0-cfc47547d60a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Bilder/Tetris_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ljud/dark.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ljud/theme1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ljud/theme2.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ljud/theme3.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/IncorrectFormatException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/View/Settings/AudioPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/View/Settings/KeyboardPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/View/Settings/SettingsFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Control/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/Control/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/TetrisBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/TetrisBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/BottomPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/BottomPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View/TopPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/TopPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../text.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,30 +31,45 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
-  <component name="ProjectId" id="2ed5CXVDA3791t7N0Y585YFhpmu" />
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2fDiWvjhk8QK5wU51iqPXp5Ao9E" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "SpelLogik-försök",
-    "last_opened_file_path": "/Users/bismakhan/Documents/GitHub/Tetris_projekt_G19/Tetris/src"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging main&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="src" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="src" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="63211fed-e990-4746-9cbb-13f735b406e4" name="Changes" comment="" />
-      <created>1712221487539</created>
+      <changelist id="c3233aee-d755-4207-98e0-cfc47547d60a" name="Changes" comment="" />
+      <created>1713342084830</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1712221487539</updated>
+      <updated>1713342084830</updated>
     </task>
     <servers />
   </component>

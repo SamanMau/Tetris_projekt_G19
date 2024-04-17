@@ -67,6 +67,10 @@ public class Controller {
     
     public void startTimer(boolean gameState) {
         this.gameState = gameState;
+
+        if(gameState){
+            this.speed = new Timer(400, new ActionListener() {
+
         if(gameState){
             this.speed = new Timer(400, new ActionListener() {
                 @Override
@@ -194,6 +198,7 @@ public class Controller {
                     //Den kontrollerar att blocken inte går utanför spelplanen
                     //Om platsen vi ska gå till innehåller redan block (dvs den är inte null) så fortsätter loopen uppåt
                         board[boardRow][boardCol] = block.getColor();
+
                 }
             }
         }
@@ -244,10 +249,80 @@ public class Controller {
             } while (action.equals("space") && !isAtBottom() && !isCollidingWithBlock());
 
             if (isAtBottom() || isCollidingWithBlock()) {
+                block.incrementY(-1);
                 addColorToBoard();
                 generateBlock();
                 restartGameLogic();
             }
+
+        } else if (action.equals("up")) {
+            block.rotateBlock();
+
+        }
+        playfield.repaint();
+    }
+    private void restartGameLogic(){
+        collision = false;
+        if (!gameState) {
+            startTimer(true);
+        }
+    }
+
+           /* if ((block.checkLeft() == 0) || ((block.getShape().length + block.getY()) * kvadrat == 600)) {
+=======
+>>>>>>> ac9b21f91d8a6009fb251b3c916c39102ab73879
+                return;
+            }
+<<<<<<< HEAD
+        }
+
+        if (action.equals("right")) {
+            if (((block.checkRight() + block.getShape()[0].length == column)) || ((block.getShape().length + block.getY()) * kvadrat == 600)) {
+=======
+            block.goLeft();
+        } else if (action.equals("right")) {
+            if ((block.getX() + block.getShape()[0].length >= column) || isAtBottom() || isCollidingWithBlock()) {
+>>>>>>> ac9b21f91d8a6009fb251b3c916c39102ab73879
+                return;
+            }
+            block.goRight();
+        } else if (action.equals("down") || action.equals("space")) {
+
+<<<<<<< HEAD
+        if (action.equals("down")) {
+
+            if ((block.getShape().length + block.getY()) * kvadrat == 600) {
+                return;
+            } else {
+=======
+            do {
+>>>>>>> ac9b21f91d8a6009fb251b3c916c39102ab73879
+                block.goDown();
+            } while (action.equals("space") && !isAtBottom() && !isCollidingWithBlock());
+
+            if (isAtBottom() || isCollidingWithBlock()) {
+                addColorToBoard();
+                generateBlock();
+                restartGameLogic();
+            }
+
+
+        if (action.equals("space")) {
+            while ((block.getShape().length + block.getY()) * kvadrat < 600) {
+                block.goDown();
+            }
+            playfield.repaint();
+        }
+
+        /*
+        TODO: If the action equals "up", then the block should rotate. This needs to be fixed,
+        as this feature is not implemented yet.
+
+        if (action.equals("up")) {
+            block.rotateBlock();
+            playfield.repaint();
+        }*/
+
 
         } else if (action.equals("up")) {
             block.rotationBlock();
@@ -261,4 +336,11 @@ public class Controller {
         }
     }
 
+
 }
+
+
+/* To check if row is filled. Check the board color and see if its = to "default" (color that you start with). If true
+*  remove rows with color + add points + set the boards removed to regular color.
+*
+ */

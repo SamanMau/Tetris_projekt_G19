@@ -95,6 +95,10 @@ public class TetrisBlock  {
         return shape.length;
     }
 
+
+    public void incrementY(int i) {
+    }
+
     //Rotate block
     public void rotationBlock() {
         if(rotateNum == 2){
@@ -153,5 +157,6 @@ public class TetrisBlock  {
         }
         return 0;
     }
+
 
 }
