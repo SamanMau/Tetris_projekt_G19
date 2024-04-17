@@ -96,9 +96,6 @@ public class TetrisBlock  {
     }
 
 
-    public void incrementY(int i) {
-    }
-
     //Rotate block
     public void rotationBlock() {
         if(rotateNum == 2){
@@ -159,4 +156,7 @@ public class TetrisBlock  {
     }
 
 
+    public void rotateBlock() {
+        //TODO rotate here
+    }
 }

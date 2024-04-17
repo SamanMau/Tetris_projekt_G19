@@ -71,9 +71,6 @@ public class Controller {
 
         if(gameState){
             this.speed = new Timer(400, new ActionListener() {
-
-        if(gameState){
-            this.speed = new Timer(400, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (collision) {
@@ -99,6 +96,7 @@ public class Controller {
             this.speed.start();
         }
     }
+
 
     //ttest
 
@@ -326,7 +324,7 @@ public class Controller {
             playfield.repaint();
         }*/
 
-
+/*
         } else if (action.equals("up")) {
             block.rotationBlock();
         }
@@ -337,7 +335,7 @@ public class Controller {
         if (!gameState) {
             startTimer(true);
         }
-    }
+    }*/
 
 
 }
