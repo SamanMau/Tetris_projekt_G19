@@ -19,6 +19,7 @@ import java.util.Random;
 
 public class Controller {
     //halloj vi testar!
+    //test
     private ListOfBlocks listOfBlocksObj;
     private ArrayList<int[][]> listOfShape;
     private ArrayList<Color> listOfColors;
