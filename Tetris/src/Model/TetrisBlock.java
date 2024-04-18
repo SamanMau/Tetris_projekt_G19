@@ -128,7 +128,10 @@ public class TetrisBlock  {
             return tempBlock;
         }
         else {
-            decrementX();
+            int decrementTimes = getX() + getShape().length - 10;
+            for (int i = 0; i < decrementTimes; i++){
+                decrementX();
+            }
             return tempBlock;
         }
 
@@ -154,8 +157,11 @@ public class TetrisBlock  {
         if(getX() + getShape().length  <= 10){
             return tempBlock;
         }
-        else {
-            decrementX();
+        else{
+            int decrementTimes = getX() + getShape().length - 10;
+            for (int i = 0; i < decrementTimes; i++){
+                decrementX();
+            }
             return tempBlock;
         }
     }
