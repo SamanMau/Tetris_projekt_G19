@@ -309,3 +309,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+#idea files
+.idea*
