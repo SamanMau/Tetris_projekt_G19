@@ -105,7 +105,6 @@ public class TopPanel extends JPanel {
         playMusic.setActionCommand("gameMusic");
         music = "src/Ljud/theme1.wav";
         musicOff ="on";
-
         se.setFile(music);
         se.playTheSong();
 
