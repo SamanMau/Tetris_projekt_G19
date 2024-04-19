@@ -65,7 +65,7 @@ public class Controller {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    
+
     public void startTimer(boolean gameState) {
         this.gameState = gameState;
 
@@ -87,7 +87,7 @@ public class Controller {
                             }
                         }
                         else{
-                             stopTimer();
+                            stopTimer();
                         }
                     }
                     playfield.repaint();
@@ -122,8 +122,8 @@ public class Controller {
 
     //Den här metoden kontrollerar ifall det aktuella blocket har nått botten av spelplanen
     private boolean isAtBottom() {
-       // block getY(),  hämtar den aktuella y-posisionen för det aktuella blocket på spelplanen
-      //  block.getShape().length, Hämtar höjden på det aktuella blocket på spelplanen
+        // block getY(),  hämtar den aktuella y-posisionen för det aktuella blocket på spelplanen
+        //  block.getShape().length, Hämtar höjden på det aktuella blocket på spelplanen
         //Först beräknas den potentiella positionen för botten av blocket
         //Sedan jämförs den beräknade position med längden av spelplanen
         //Om position är större eller lika med längeden på spelplan, innebär att blocket har nått botten eller passerat botten av spelplan
@@ -198,7 +198,7 @@ public class Controller {
                     int boardCol = x + col;
                     //Den kontrollerar att blocken inte går utanför spelplanen
                     //Om platsen vi ska gå till innehåller redan block (dvs den är inte null) så fortsätter loopen uppåt
-                        board[boardRow][boardCol] = block.getColor();
+                    board[boardRow][boardCol] = block.getColor();
 
                 }
             }
@@ -342,6 +342,6 @@ public class Controller {
 
 
 /* To check if row is filled. Check the board color and see if its = to "default" (color that you start with). If true
-*  remove rows with color + add points + set the boards removed to regular color.
-*
+ *  remove rows with color + add points + set the boards removed to regular color.
+ *
  */
